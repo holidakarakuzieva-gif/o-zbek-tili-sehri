@@ -1,0 +1,6 @@
+{
+  "name": "Oʻzbek tilining sehri",
+  "description": "Rus sinflarining 8–10-sinf oʻquvchilari va oʻqituvchilari uchun zamonaviy oʻzbek tili taʼlimiy veb-platformasi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

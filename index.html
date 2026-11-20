@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oʻzbek tilining sehri — Волшебство узбекского языка</title>
+    <meta
+      name="description"
+      content="Rus sinflarining 8–10-sinf oʻquvchilari va oʻqituvchilari uchun zamonaviy oʻzbek tili taʼlimiy veb-platformasi: maʼruzalar, oʻyinlar, mashqlar, testlar va lugʻat."
+    />
+    <meta property="og:title" content="Oʻzbek tilining sehri — Волшебство узбекского языка" />
+    <meta
+      property="og:description"
+      content="Oʻzbek tilini oʻyin, qisqa maʼruza, mashq, lugʻat va sheʼriy topishmoqlar orqali oʻrganing."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('uzbek-sehri-theme');
+          var prefersDark =
+            window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (saved === 'dark' || (!saved && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
