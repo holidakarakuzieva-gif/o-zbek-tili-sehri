@@ -1,119 +1,12 @@
 import type { TestSuite } from '../../types';
+import { grade8Tests } from './grade8';
+import { grade9Tests } from './grade9';
+import { grade10Tests } from './grade10';
 
 export const sampleTests: TestSuite[] = [
-  {
-    id: 'test-8-fonetika',
-    grade: 8,
-    topic: 'Fonetika va imlo',
-    titleUz: '8-sinf: Tovushlar va imlo sinovi',
-    titleRu: '8 класс: Тест по фонетике и орфографии',
-    timeLimitSeconds: 300,
-    questions: [
-      {
-        id: 't8-q1',
-        type: 'single',
-        questionUz: 'Qaysi soʻzda tutuq belgisi (ʼ) toʻgʻri qoʻyilgan?',
-        questionRu: 'В каком слове знак «tutuq belgisi» (ʼ) поставлен правильно?',
-        options: ['maʼno', 'oʻqʼituvchi', 'gʼisht', 'kiʼtob'],
-        correctIndex: 0,
-        explanationUz: '"Maʼno" soʻzida "a" unlisini choʻzib ajratish uchun tutuq belgisi (ʼ) qoʻyiladi.',
-        explanationRu: 'В слове «maʼno» (смысл) используется знак ʼ, а в oʻqituvchi и gʻisht — буква ʻ.',
-      },
-      {
-        id: 't8-q2',
-        type: 'single',
-        questionUz: '"У меня есть две тетради" jumlasining toʻgʻri tarjimasi qaysi?',
-        questionRu: 'Какой перевод фразы «У меня есть две тетради» правильный?',
-        options: [
-          'Menda ikkita daftarlar bor.',
-          'Menda ikkita daftar bor.',
-          'Men ikkita daftar bor.',
-          'Menga ikkita daftarlar bor.',
-        ],
-        correctIndex: 1,
-        explanationUz: 'Sondan keyin ot birlikda keladi: "ikkita daftar" ("daftarlar" emas).',
-        explanationRu: 'После числительного существительное стоит в единственном числе: «ikkita daftar».',
-      },
-      {
-        id: 't8-q3',
-        type: 'single',
-        questionUz: 'Qaysi soʻz "qol" (останься) soʻzi bilan minimal juftlik hosil qiladi?',
-        questionRu: 'Какое слово образует минимальную пару со словом «qol» (останься)?',
-        options: ['kitob', 'kol', 'gul', 'togʻ'],
-        correctIndex: 1,
-        explanationUz: '"Qol" va "kol" faqat bitta boshlangʻich tovush (q / k) bilan farqlanadi.',
-        explanationRu: '«Qol» и «kol» различаются только первым звуком (q / k).',
-      },
-    ],
-  },
-  {
-    id: 'test-9-sintaksis',
-    grade: 9,
-    topic: 'Sodda gap turlari',
-    titleUz: '9-sinf: Gap turlari va kesim',
-    titleRu: '9 класс: Типы простых предложений',
-    timeLimitSeconds: 300,
-    questions: [
-      {
-        id: 't9-q1',
-        type: 'single',
-        questionUz: '"Ertaga sinf soati oʻtkaziladi" — gapning egasi qaysi?',
-        questionRu: 'Какое слово является подлежащим в предложении «Ertaga sinf soati oʻtkaziladi»?',
-        options: ['Ertaga', 'sinf soati', 'oʻtkaziladi', 'ega yoʻq'],
-        correctIndex: 1,
-        explanationUz: 'Nima oʻtkaziladi? — sinf soati (ega).',
-        explanationRu: 'Что будет проведено? — «sinf soati» (классный час).',
-      },
-      {
-        id: 't9-q2',
-        type: 'single',
-        questionUz: 'Shaxsi nomaʼlum gapni toping:',
-        questionRu: 'Выберите неопределённо-личное предложение:',
-        options: [
-          'Men uy vazifasini bajardim.',
-          'Maktab bogʻiga yangi koʻchatlar ekishdi.',
-          'Bugun havo iliq.',
-          'Sen kitobni oʻqib chiq.',
-        ],
-        correctIndex: 1,
-        explanationUz: '"Ekishdi" — III shaxs koʻplik, aniq bajaruvchi koʻrsatilmagan.',
-        explanationRu: '«Ekishdi» (посадили) — 3-е лицо множественного числа.',
-      },
-    ],
-  },
-  {
-    id: 'test-10-uslub',
-    grade: 10,
-    topic: 'Nutq uslublari',
-    titleUz: '10-sinf: Ish qogʻozlari va nutq uslublari',
-    titleRu: '10 класс: Деловые бумаги и стили речи',
-    timeLimitSeconds: 300,
-    questions: [
-      {
-        id: 't10-q1',
-        type: 'single',
-        questionUz: 'Qaysi hujjat rasmiy uslubga kirmaydi?',
-        questionRu: 'Какой текст НЕ относится к официально-деловому стилю?',
-        options: ['Ariza', 'Tushuntirish xati', 'Hikoya', 'Tavsifnoma'],
-        correctIndex: 2,
-        explanationUz: '"Hikoya" badiiy uslub janridir.',
-        explanationRu: '«Hikoya» (рассказ) относится к художественному стилю.',
-      },
-      {
-        id: 't10-q2',
-        type: 'single',
-        questionUz: 'Arizaning pastki qismida nimalar boʻlishi shart?',
-        questionRu: 'Что обязательно указывается в нижней части заявления?',
-        options: [
-          'Faqat ism',
-          'Sana va imzo',
-          'Maktab manzili',
-          'Telefon raqami',
-        ],
-        correctIndex: 1,
-        explanationUz: 'Har bir rasmiy ariza sana va imzo bilan tasdiqlanadi.',
-        explanationRu: 'Каждое заявление заверяется датой и подписью.',
-      },
-    ],
-  },
+  ...grade8Tests,
+  ...grade9Tests,
+  ...grade10Tests,
 ];
+
+export { grade8Tests, grade9Tests, grade10Tests };

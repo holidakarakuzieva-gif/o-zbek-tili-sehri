@@ -88,7 +88,9 @@ export default function SafeInternetPage() {
 
       {/* Interactive Quiz */}
       <section className="mt-8 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[var(--shadow-card)]">
-        <h2 className="text-lg font-extrabold text-[var(--text)]">Mini-viktorina</h2>
+        <h2 className="text-lg font-extrabold text-[var(--text)]">
+          {pickText('Mini-viktorina', 'Мини-викторина')}
+        </h2>
         <div className="mt-4 space-y-4">
           {safeQuizItems.map((q, idx) => {
             const picked = quizAnswers[q.id];

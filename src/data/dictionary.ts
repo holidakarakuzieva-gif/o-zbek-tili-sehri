@@ -1,144 +1,15 @@
 import type { DictEntry } from '../types';
 import { toCyrillic } from '../utils/translit';
+import { DICTIONARY_PART_1 } from './dictionaryPart1';
+import { DICTIONARY_PART_2 } from './dictionaryPart2';
 
-type RawDictEntry = Omit<DictEntry, 'uzCyrl'>;
+const ALL_RAW_ENTRIES = [...DICTIONARY_PART_1, ...DICTIONARY_PART_2];
 
-const RAW_DICTIONARY: RawDictEntry[] = [
-  {
-    id: 'dict-1',
-    uzLatn: 'oʻqituvchi',
-    ru: 'учитель',
-    partOfSpeech: 'ot / сущ.',
-    topic: 'Maktab',
-    exampleUz: 'Oʻqituvchimiz darsni qiziqarli oʻtadi.',
-    exampleRu: 'Наш учитель интересно проводит урок.',
-    emoji: '👩‍🏫',
-    phoneticRu: 'оъқитувчи',
-  },
-  {
-    id: 'dict-2',
-    uzLatn: 'oʻquvchi',
-    ru: 'ученик',
-    partOfSpeech: 'ot / сущ.',
-    topic: 'Maktab',
-    exampleUz: 'Har bir oʻquvchi kitob oʻqishi kerak.',
-    exampleRu: 'Каждый ученик должен читать книги.',
-    emoji: '🧑‍🎓',
-    phoneticRu: 'оъқувчи',
-  },
-  {
-    id: 'dict-3',
-    uzLatn: 'doʻstlik',
-    ru: 'дружба',
-    partOfSpeech: 'ot / сущ.',
-    topic: 'Qadriyatlar',
-    exampleUz: 'Haqiqiy doʻstlik hamma narsadan ustun.',
-    exampleRu: 'Настоящая дружба превыше всего.',
-    emoji: '🤝',
-    phoneticRu: 'доъстлик',
-  },
-  {
-    id: 'dict-4',
-    uzLatn: 'maʼno',
-    ru: 'смысл, значение',
-    partOfSpeech: 'ot / сущ.',
-    topic: 'Til',
-    exampleUz: 'Bu soʻzning maʼnosini lugʻatdan topdim.',
-    exampleRu: 'Я нашёл значение этого слова в словаре.',
-    emoji: '💡',
-    phoneticRu: 'маъно',
-  },
-  {
-    id: 'dict-5',
-    uzLatn: 'bilim',
-    ru: 'знание',
-    partOfSpeech: 'ot / сущ.',
-    topic: 'Maktab',
-    exampleUz: 'Bilim — kelajak kaliti.',
-    exampleRu: 'Знание — ключ к будущему.',
-    emoji: '📚',
-    phoneticRu: 'билим',
-  },
-  {
-    id: 'dict-6',
-    uzLatn: 'bahor',
-    ru: 'весна',
-    partOfSpeech: 'ot / сущ.',
-    topic: 'Tabiat',
-    exampleUz: 'Bahorda daraxtlar gullaydi.',
-    exampleRu: 'Весной цветут деревья.',
-    emoji: '🌸',
-    phoneticRu: 'баҳор',
-  },
-  {
-    id: 'dict-7',
-    uzLatn: 'quyosh',
-    ru: 'солнце',
-    partOfSpeech: 'ot / сущ.',
-    topic: 'Tabiat',
-    exampleUz: 'Bugun quyosh charaqlab turibdi.',
-    exampleRu: 'Сегодня ярко светит солнце.',
-    emoji: '☀️',
-    phoneticRu: 'қуёш',
-  },
-  {
-    id: 'dict-8',
-    uzLatn: 'Vatan',
-    ru: 'Родина',
-    partOfSpeech: 'ot / сущ.',
-    topic: 'Qadriyatlar',
-    exampleUz: 'Vatan — ona kabi azizdir.',
-    exampleRu: 'Родина дорога, как мать.',
-    emoji: '🇺🇿',
-    phoneticRu: 'ватан',
-  },
-  {
-    id: 'dict-9',
-    uzLatn: 'kelajak',
-    ru: 'будущее',
-    partOfSpeech: 'ot / сущ.',
-    topic: 'Vaqt',
-    exampleUz: 'Kelajakda dasturchi boʻlmoqchiman.',
-    exampleRu: 'В будущем я хочу стать программистом.',
-    emoji: '🚀',
-    phoneticRu: 'келажак',
-  },
-  {
-    id: 'dict-10',
-    uzLatn: 'tabassum',
-    ru: 'улыбка',
-    partOfSpeech: 'ot / сущ.',
-    topic: 'His-tuygʻular',
-    exampleUz: 'Tabassum insonlarga iliqlik ulashadi.',
-    exampleRu: 'Улыбка дарит людям тепло.',
-    emoji: '😊',
-    phoneticRu: 'табассум',
-  },
-  {
-    id: 'dict-11',
-    uzLatn: 'muvaffaqiyat',
-    ru: 'успех',
-    partOfSpeech: 'ot / сущ.',
-    topic: 'Qadriyatlar',
-    exampleUz: 'Mehnat orqali muvaffaqiyatga erishiladi.',
-    exampleRu: 'Успеха достигают через труд.',
-    emoji: '🏆',
-    phoneticRu: 'муваффақият',
-  },
-  {
-    id: 'dict-12',
-    uzLatn: 'axborot',
-    ru: 'информация',
-    partOfSpeech: 'ot / сущ.',
-    topic: 'Texnologiya',
-    exampleUz: 'Internetda foydali axborot koʻp.',
-    exampleRu: 'В интернете много полезной информации.',
-    emoji: '💻',
-    phoneticRu: 'ахборот',
-  },
-];
-
-export const dictionaryEntries: DictEntry[] = RAW_DICTIONARY.map((item) => ({
+export const dictionaryEntries: DictEntry[] = ALL_RAW_ENTRIES.map((item) => ({
   ...item,
   uzCyrl: toCyrillic(item.uzLatn),
 }));
+
+export const dictionaryTopics: string[] = Array.from(
+  new Set(ALL_RAW_ENTRIES.map((item) => item.topic))
+);

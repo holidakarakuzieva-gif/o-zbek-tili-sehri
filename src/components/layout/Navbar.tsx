@@ -75,11 +75,11 @@ export function Navbar() {
           >
             Oʻ
           </span>
-          <span className="hidden sm:inline">{t('siteName')}</span>
+          <span className="hidden sm:inline md:hidden lg:inline">{t('siteName')}</span>
         </Link>
 
         {/* Zone 2: Desktop Primary Links + More Dropdown */}
-        <nav aria-label="Main navigation" className="hidden md:flex items-center gap-5">
+        <nav aria-label="Main navigation" className="hidden md:flex items-center md:gap-3 lg:gap-5">
           {primaryLinks.map((item) => (
             <NavLink
               key={item.to}

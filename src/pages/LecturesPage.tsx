@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react';
-import { CheckCircle2, Eye, EyeOff, Lightbulb, AlertTriangle } from 'lucide-react';
+import { CheckCircle2, Eye, EyeOff, Lightbulb, AlertTriangle, Search } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { PageMeta } from '../components/ui/PageMeta';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { sampleLessons } from '../data/lessons';
 import { useLang } from '../hooks/useLang';
 import { useProgress } from '../hooks/useProgress';
+import { matchesQuery } from '../utils/normalize';
 import type { Grade, LessonCategory } from '../types';
 
 export default function LecturesPage() {
@@ -13,9 +14,20 @@ export default function LecturesPage() {
   const { progress, completeLesson } = useProgress();
   const [gradeFilter, setGradeFilter] = useState<'all' | Grade>('all');
   const [catFilter, setCatFilter] = useState<'all' | LessonCategory>('all');
+  const [query, setQuery] = useState('');
   const [selectedId, setSelectedId] = useState<string>(sampleLessons[0].id);
   const [showRuNote, setShowRuNote] = useState(lang === 'ru');
   const [answers, setAnswers] = useState<Record<string, number>>({});
+
+  const catLabels: Record<LessonCategory, string> = {
+    fonetika: t('catFonetika'),
+    leksika: t('catLeksika'),
+    morfologiya: t('catMorfologiya'),
+    sintaksis: t('catSintaksis'),
+    imlo: t('catImlo'),
+    nutq: t('catNutq'),
+    muloqot: t('catMuloqot'),
+  };
 
   const categories: { id: 'all' | LessonCategory; label: string }[] = [
     { id: 'all', label: t('allCategories') },
@@ -32,9 +44,15 @@ export default function LecturesPage() {
     return sampleLessons.filter((l) => {
       if (gradeFilter !== 'all' && l.grade !== gradeFilter) return false;
       if (catFilter !== 'all' && l.category !== catFilter) return false;
-      return true;
+      if (!query.trim()) return true;
+      return (
+        matchesQuery(l.titleUz, query) ||
+        matchesQuery(l.titleRu, query) ||
+        matchesQuery(l.goalUz, query) ||
+        matchesQuery(l.goalRu, query)
+      );
     });
-  }, [gradeFilter, catFilter]);
+  }, [gradeFilter, catFilter, query]);
 
   const activeLesson =
     filteredLessons.find((l) => l.id === selectedId) ?? filteredLessons[0] ?? null;
@@ -44,29 +62,54 @@ export default function LecturesPage() {
   return (
     <>
       <PageMeta title={t('lessonsTitle')} description={t('lessonsSubtitle')} />
-      <SectionHeader title={t('lessonsTitle')} subtitle={t('lessonsSubtitle')} />
+      <SectionHeader
+        title={t('lessonsTitle')}
+        subtitle={t('lessonsSubtitle')}
+        rightSlot={
+          <span className="text-sm font-bold tabular-nums text-[var(--primary)]">
+            {filteredLessons.length} {t('lessonsCountLabel')}
+          </span>
+        }
+      />
 
       {/* Filters */}
-      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div
-          role="group"
-          aria-label={t('gradeLabel')}
-          className="inline-flex flex-wrap items-center gap-1 rounded-xl border border-[var(--border)] bg-[var(--surface-subtle)] p-1"
-        >
-          {(['all', 8, 9, 10] as const).map((g) => (
-            <button
-              key={g}
-              type="button"
-              onClick={() => setGradeFilter(g)}
-              className={`h-8 rounded-lg px-3 text-xs font-bold transition-colors cursor-pointer ${
-                gradeFilter === g
-                  ? 'bg-[var(--card)] text-[var(--primary)] shadow-xs'
-                  : 'text-[var(--text-muted)] hover:text-[var(--text)]'
-              }`}
-            >
-              {g === 'all' ? t('allGrades') : `${g}-${t('gradeLabel')}`}
-            </button>
-          ))}
+      <div className="mb-6 flex flex-col gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div
+            role="group"
+            aria-label={t('gradeLabel')}
+            className="inline-flex flex-wrap items-center gap-1 rounded-xl border border-[var(--border)] bg-[var(--surface-subtle)] p-1"
+          >
+            {(['all', 8, 9, 10] as const).map((g) => (
+              <button
+                key={g}
+                type="button"
+                onClick={() => setGradeFilter(g)}
+                className={`h-8 whitespace-nowrap rounded-lg px-3 text-xs font-bold transition-colors cursor-pointer ${
+                  gradeFilter === g
+                    ? 'bg-[var(--card)] text-[var(--primary)] shadow-xs'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text)]'
+                }`}
+              >
+                {g === 'all' ? t('allGrades') : `${g}-${t('gradeLabel')}`}
+              </button>
+            ))}
+          </div>
+
+          <div className="relative w-full sm:max-w-xs">
+            <Search
+              className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-muted)]"
+              aria-hidden="true"
+            />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={t('searchPlaceholder')}
+              aria-label={t('searchPlaceholder')}
+              className="h-9 w-full rounded-[10px] border border-[var(--border)] bg-[var(--card)] pl-9 pr-3 text-sm text-[var(--text)]"
+            />
+          </div>
         </div>
 
         <div className="flex flex-wrap gap-1.5">
@@ -75,7 +118,7 @@ export default function LecturesPage() {
               key={c.id}
               type="button"
               onClick={() => setCatFilter(c.id)}
-              className={`h-8 rounded-lg border px-3 text-xs font-semibold transition-colors cursor-pointer ${
+              className={`h-8 whitespace-nowrap rounded-lg border px-3 text-xs font-semibold transition-colors cursor-pointer ${
                 catFilter === c.id
                   ? 'border-[var(--primary)] bg-[var(--primary-soft)] text-[var(--primary)]'
                   : 'border-[var(--border)] bg-[var(--card)] text-[var(--text-muted)] hover:text-[var(--text)]'
@@ -94,7 +137,7 @@ export default function LecturesPage() {
       ) : (
         <div className="grid gap-6 lg:grid-cols-12">
           {/* Lesson list sidebar */}
-          <aside className="space-y-2 lg:col-span-4">
+          <aside className="space-y-2 lg:col-span-4 lg:max-h-[78vh] lg:overflow-y-auto lg:pr-1">
             {filteredLessons.map((lesson) => {
               const active = activeLesson?.id === lesson.id;
               const done = progress.completedLessons.includes(lesson.id);
@@ -114,7 +157,7 @@ export default function LecturesPage() {
                 >
                   <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
                     <span>
-                      {lesson.grade}-{t('gradeLabel')} · {lesson.category}
+                      {lesson.grade}-{t('gradeLabel')} · {catLabels[lesson.category]}
                     </span>
                     {done && (
                       <span className="inline-flex items-center gap-1 font-bold text-[var(--success)]">
@@ -136,7 +179,7 @@ export default function LecturesPage() {
             <article className="space-y-6 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-[var(--shadow-card)] lg:col-span-8">
               <div className="border-b border-[var(--border)] pb-4">
                 <p className="text-xs font-bold text-[var(--primary)]">
-                  {activeLesson.grade}-{t('gradeLabel')} · {activeLesson.category}
+                  {activeLesson.grade}-{t('gradeLabel')} · {catLabels[activeLesson.category]}
                 </p>
                 <h2 className="mt-1 text-2xl font-extrabold text-[var(--text)]">
                   {pickText(activeLesson.titleUz, activeLesson.titleRu)}

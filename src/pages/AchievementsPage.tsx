@@ -30,7 +30,7 @@ export default function AchievementsPage() {
 
         <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 shadow-[var(--shadow-card)]">
           <p className="text-xs font-bold text-[var(--text-muted)]">{t('streakLabel')}</p>
-          <p className="mt-1 flex items-center gap-1.5 text-3xl font-extrabold text-[var(--accent)] tabular-nums">
+          <p className="mt-1 flex items-center gap-1.5 text-3xl font-extrabold text-[var(--accent-text)] tabular-nums">
             <Flame className="h-6 w-6" aria-hidden="true" />
             <span>{progress.streak}</span>
           </p>

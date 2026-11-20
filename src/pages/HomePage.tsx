@@ -19,8 +19,14 @@ import {
 import { Button } from '../components/ui/Button';
 import { PageMeta } from '../components/ui/PageMeta';
 import { dictionaryEntries } from '../data/dictionary';
+import { sampleExercises } from '../data/exercises';
 import { sampleFacts } from '../data/facts';
+import { sampleGallery } from '../data/gallery';
+import { sampleLessons } from '../data/lessons';
+import { sampleProverbs } from '../data/proverbs';
 import { sampleRiddles } from '../data/riddles';
+import { sampleTests } from '../data/tests';
+import { sampleTongueTwisters } from '../data/tongueTwisters';
 import { useLang } from '../hooks/useLang';
 import { useProgress } from '../hooks/useProgress';
 
@@ -51,15 +57,60 @@ export default function HomePage() {
   };
 
   const quickCards = [
-    { to: '/lessons', title: t('navLessons'), icon: BookOpen, count: '8–10 ' + t('gradeLabel') },
-    { to: '/exercises', title: t('navExercises'), icon: Dumbbell, count: 'A2–B1' },
-    { to: '/games', title: t('navGames'), icon: Gamepad2, count: t('gamesClassMode') },
-    { to: '/tests', title: t('navTests'), icon: FileCheck2, count: '8–10 ' + t('gradeLabel') },
-    { to: '/dictionary', title: t('navDictionary'), icon: Languages, count: 'RU ↔ UZ' },
-    { to: '/poetry', title: t('navPoetry'), icon: Sparkles, count: '4+ qator' },
-    { to: '/facts', title: t('navFacts'), icon: HelpCircle, count: 'Navoiy · Tarix' },
-    { to: '/gallery', title: t('navGallery'), icon: Compass, count: 'Oʻzbekiston' },
-    { to: '/safe-internet', title: t('navSafeInternet'), icon: ShieldCheck, count: '7 qoida' },
+    {
+      to: '/lessons',
+      title: t('navLessons'),
+      icon: BookOpen,
+      count: `${sampleLessons.length} ${t('lessonsCountLabel')}`,
+    },
+    {
+      to: '/exercises',
+      title: t('navExercises'),
+      icon: Dumbbell,
+      count: `${sampleExercises.length} ${t('exercisesCountLabel')}`,
+    },
+    {
+      to: '/games',
+      title: t('navGames'),
+      icon: Gamepad2,
+      count: `10 · ${t('gamesClassMode')}`,
+    },
+    {
+      to: '/tests',
+      title: t('navTests'),
+      icon: FileCheck2,
+      count: `${sampleTests.length} ${pickText('test', 'тестов')}`,
+    },
+    {
+      to: '/dictionary',
+      title: t('navDictionary'),
+      icon: Languages,
+      count: `${dictionaryEntries.length} ${t('dictWordsCount')}`,
+    },
+    {
+      to: '/poetry',
+      title: t('navPoetry'),
+      icon: Sparkles,
+      count: `${sampleRiddles.length + sampleProverbs.length + sampleTongueTwisters.length} ${pickText('matn', 'текстов')}`,
+    },
+    {
+      to: '/facts',
+      title: t('navFacts'),
+      icon: HelpCircle,
+      count: `${sampleFacts.length} ${t('factsCountLabel')}`,
+    },
+    {
+      to: '/gallery',
+      title: t('navGallery'),
+      icon: Compass,
+      count: `${sampleGallery.length} ${t('galleryCountLabel')}`,
+    },
+    {
+      to: '/safe-internet',
+      title: t('navSafeInternet'),
+      icon: ShieldCheck,
+      count: `7 ${pickText('qoida', 'правил')}`,
+    },
     { to: '/teacher', title: t('navTeacher'), icon: GraduationCap, count: 'A4 PDF' },
   ];
 
@@ -121,7 +172,7 @@ export default function HomePage() {
             </div>
 
             <div className="rounded-xl bg-[var(--surface-subtle)] p-3">
-              <div className="flex items-center justify-center gap-1 text-xl font-extrabold text-[var(--accent)] tabular-nums">
+              <div className="flex items-center justify-center gap-1 text-xl font-extrabold text-[var(--accent-text)] tabular-nums">
                 <Flame className="h-4 w-4" aria-hidden="true" />
                 <span>{progress.streak}</span>
               </div>
@@ -210,7 +261,7 @@ export default function HomePage() {
         {/* Riddle of the Day */}
         <article className="flex flex-col justify-between rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 shadow-[var(--shadow-card)]">
           <div>
-            <p className="text-xs font-bold text-[var(--accent)]">{t('homeRiddleOfDay')}</p>
+            <p className="text-xs font-bold text-[var(--accent-text)]">{t('homeRiddleOfDay')}</p>
             <div className="mt-3 space-y-1 text-sm font-medium text-[var(--text)]">
               {riddleOfDay.lines.map((line, i) => (
                 <p key={i}>{uzText(line)}</p>
