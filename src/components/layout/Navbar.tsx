@@ -63,6 +63,13 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-[var(--border)] bg-[var(--card)]/95 backdrop-blur-sm no-print">
+      <div className="border-b border-[var(--border)]/70 bg-[var(--surface-subtle)]/80">
+        <div className="mx-auto max-w-6xl px-4 py-1.5 sm:px-6">
+          <p className="text-left text-[11px] font-semibold leading-snug text-[var(--text-muted)] sm:text-xs">
+            {t('authorCredit')}
+          </p>
+        </div>
+      </div>
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:gap-8">
         {/* Zone 1: Single-line Brand Wordmark */}
         <Link

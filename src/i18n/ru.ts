@@ -3,6 +3,7 @@ import type { TranslationDict } from './uz-latn';
 export const ru: TranslationDict = {
   siteName: 'Волшебство узбекского языка',
   siteTagline: 'Современная интерактивная платформа для изучения узбекского языка в 8–10 классах',
+  authorCredit: 'Подготовлено учителем узбекского языка высшей категории школы № 54 КАРАКУЗИЕВОЙ ХОЛИДОЙ НИГМАТИЛЛАЕВНОЙ',
   startLearning: 'Начать',
   continueLearning: 'Продолжить',
   moreSections: 'Все разделы',

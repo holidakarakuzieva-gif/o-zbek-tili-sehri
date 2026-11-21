@@ -3,6 +3,7 @@ import type { TranslationDict } from './uz-latn';
 export const uzCyrl: TranslationDict = {
   siteName: 'Ўзбек тилининг сеҳри',
   siteTagline: '8–10-синф ўқувчилари учун ўзбек тилини ўрганишнинг замонавий ва интерактив майдони',
+  authorCredit: '54-мактабнинг олий тоифали ўзбек тили ўқитувчиси КАРАКУЗИЕВА ХОЛИДА НИГМАТИЛЛАЕВНА томонидан тайёрланди',
   startLearning: 'Бошлаш',
   continueLearning: 'Давом эттириш',
   moreSections: 'Барча бўлимлар',

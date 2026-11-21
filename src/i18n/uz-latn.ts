@@ -1,6 +1,7 @@
 export const uzLatn = {
   siteName: 'Oʻzbek tilining sehri',
   siteTagline: '8–10-sinf oʻquvchilari uchun oʻzbek tilini oʻrganishning zamonaviy va interaktiv maydoni',
+  authorCredit: '54-maktabning oliy toifali oʻzbek tili oʻqituvchisi KARAKUZIYEVA XOLIDA NIGMATILLAYEVNA tomonidan tayyorlandi',
   startLearning: 'Boshlash',
   continueLearning: 'Davom ettirish',
   moreSections: 'Barcha boʻlimlar',
